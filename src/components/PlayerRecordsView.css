@@ -2,11 +2,13 @@
   height: 32px;
   width: 128px;
   background-color: green;
+  margin-bottom: 1px;
 }
 .remaining__name {
   height: 32px;
   width: 128px;
   background-color: orange;
+  margin-bottom: 1px;
 }
 .btn__undo {
   width: 32px;

@@ -5,12 +5,15 @@ function PlayerManager({ state }) {
     players: [players, setPlayers],
     playerRecords: [playerRecords, setPlayerRecords],
     remainingPlayers: [remainingPlayers, setRemainingPlayers],
+    gateMovement: [gateMovement, setGateMovement],
   } = {
-    player: useState([]),
+    players: useState([]),
     ...(state || {}),
     playerRecords: useState([]),
     ...(state || {}),
     remainingPlayers: useState([]),
+    ...(state || {}),
+    gateMovement: useState([]),
     ...(state || {}),
   };
   const [name, setName] = useState("");
@@ -23,20 +26,35 @@ function PlayerManager({ state }) {
     players.push({ name: name });
     setPlayers([...players]);
     setName("");
+    addGateMovement();
   }
   function addPlayerRecords(name) {
     playerRecords.push({ name: name });
     setPlayerRecords([...playerRecords]);
     calculateRemainingPlayers();
   }
+  function addGateMovement() {
+    gateMovement.push([]);
+    setGateMovement(gateMovement);
+  }
+  function addGateMovementGo(index) {
+    gateMovement[index].push(1);
+    setGateMovement(gateMovement);
+    console.log(gateMovement);
+  }
+  function addGateMovementCome(index) {
+    gateMovement[index].push(0);
+    setGateMovement(gateMovement);
+    console.log(gateMovement);
+  }
   function calculateRemainingPlayers() {
     remainingPlayers.length = 0;
-    players.forEach((element) => {
-      remainingPlayers.push(element);
+    players.forEach((element, index) => {
+      if (index > 0) remainingPlayers.push(element);
     });
     let tempPlayerRecords;
     if (playerRecords.length > 5)
-      tempPlayerRecords = playerRecords.splice(playerRecords.length - 5, 5);
+      tempPlayerRecords = playerRecords.splice(playerRecords.length - 4, 4);
     else tempPlayerRecords = playerRecords;
     tempPlayerRecords.forEach((record) => {
       remainingPlayers.forEach((player, index) => {
@@ -66,12 +84,20 @@ function PlayerManager({ state }) {
           players={players}
           removePlayer={removePlayer}
           addPlayerRecords={addPlayerRecords}
+          addGateMovementGo={addGateMovementGo}
+          addGateMovementCome={addGateMovementCome}
         ></Players>
       </div>
     </div>
   );
 }
-function Players({ players, removePlayer, addPlayerRecords }) {
+function Players({
+  players,
+  removePlayer,
+  addPlayerRecords,
+  addGateMovementGo,
+  addGateMovementCome,
+}) {
   return players.map((player, index) => {
     return (
       <Player
@@ -80,19 +106,38 @@ function Players({ players, removePlayer, addPlayerRecords }) {
         player={player}
         removePlayer={removePlayer}
         addPlayerRecords={addPlayerRecords}
+        addGateMovementGo={addGateMovementGo}
+        addGateMovementCome={addGateMovementCome}
       ></Player>
     );
   });
 }
-function Player({ index, player, removePlayer, addPlayerRecords }) {
+function Player({
+  index,
+  player,
+  removePlayer,
+  addPlayerRecords,
+  addGateMovementGo,
+  addGateMovementCome,
+}) {
   return (
     <div className="player" style={{ display: "flex" }}>
       <div
         className="player__move__group"
         style={{ display: "flex", flexDirection: "column" }}
       >
-        <div className="player__move go"></div>
-        <div className="player__move come"></div>
+        <div
+          className="player__move go"
+          onClick={() => {
+            addGateMovementGo(index);
+          }}
+        ></div>
+        <div
+          className="player__move come"
+          onClick={() => {
+            addGateMovementCome(index);
+          }}
+        ></div>
       </div>
       <div
         className="player__name"

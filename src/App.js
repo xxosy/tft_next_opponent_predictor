@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PlayerManager from "./components/PlayerManager";
 import PlayerRecordsView from "./components/PlayerRecordsView";
 import MatchHistoryView from "./components/MatchHistoryView";
+import GateMovementView from "./components/GateMovementView";
 function App() {
   const [players, setPlayers] = useState([
     { name: 1 },
@@ -11,10 +12,10 @@ function App() {
     { name: 5 },
     { name: 6 },
     { name: 7 },
-    { name: 8 },
   ]);
   const [playerRecords, setPlayerRecords] = useState([]);
   const [remainingPlayers, setRemainingPlayers] = useState([]);
+  const [gateMovement, setGateMovement] = useState([]);
   return (
     <div className="App">
       <div style={{ display: "flex" }}>
@@ -23,6 +24,7 @@ function App() {
             players: [players, setPlayers],
             playerRecords: [playerRecords, setPlayerRecords],
             remainingPlayers: [remainingPlayers, setRemainingPlayers],
+            gateMovement: [gateMovement, setGateMovement],
           }}
         ></PlayerManager>
         <div>
@@ -33,14 +35,19 @@ function App() {
             }}
           ></PlayerRecordsView>
         </div>
+        <div>
+          <GateMovementView
+            state={{ gateMovement: [gateMovement] }}
+          ></GateMovementView>
+        </div>
       </div>
       <div>
-          <MatchHistoryView
-            state={{
-              playerRecords: [playerRecords],
-            }}
-          ></MatchHistoryView>
-        </div>
+        <MatchHistoryView
+          state={{
+            playerRecords: [playerRecords],
+          }}
+        ></MatchHistoryView>
+      </div>
     </div>
   );
 }
