@@ -1,0 +1,14 @@
+.record__name {
+  height: 32px;
+  width: 128px;
+  background-color: green;
+}
+.remaining__name {
+  height: 32px;
+  width: 128px;
+  background-color: orange;
+}
+.btn__undo {
+  width: 32px;
+  height: 32px;
+}

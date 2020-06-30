@@ -1,0 +1,10 @@
+.MatchHistory__name {
+  width: 64px;
+  padding: 8px;
+  height: 16px;
+  background-color: green;
+  color: white;
+  text-align: center;
+  margin: 1px;
+  font-size: 14px;
+}

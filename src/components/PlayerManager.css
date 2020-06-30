@@ -1,0 +1,49 @@
+.players {
+  display: flex;
+  flex-direction: column;
+}
+.player {
+  display: flex;
+}
+.input__player__box {
+  display: flex;
+  padding-left: 16px;
+}
+.input__player {
+  width: 128px;
+  height: 26px;
+}
+.btn__input__player {
+  width: 32px;
+  height: 32px;
+}
+.player__move__group {
+  display: flex;
+  flex-direction: column;
+}
+.player__move {
+  width: 16px;
+  height: 16px;
+}
+.go {
+  background-color: red;
+}
+.come {
+  background-color: blue;
+}
+
+.player__name {
+  width: 128px;
+  height: 32px;
+  background-color: green;
+  color: white;
+}
+.player__predict__move {
+  width: 8px;
+  height: 32px;
+  background-color: orange;
+}
+.player__remove {
+  width: 32px;
+  height: 32px;
+}

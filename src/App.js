@@ -1,24 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import React, { useState } from "react";
+import PlayerManager from "./components/PlayerManager";
+import PlayerRecordsView from "./components/PlayerRecordsView";
+import MatchHistoryView from "./components/MatchHistoryView";
 function App() {
+  const [players, setPlayers] = useState([
+    { name: 1 },
+    { name: 2 },
+    { name: 3 },
+    { name: 4 },
+    { name: 5 },
+    { name: 6 },
+    { name: 7 },
+    { name: 8 },
+  ]);
+  const [playerRecords, setPlayerRecords] = useState([]);
+  const [remainingPlayers, setRemainingPlayers] = useState([]);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div style={{ display: "flex" }}>
+        <PlayerManager
+          state={{
+            players: [players, setPlayers],
+            playerRecords: [playerRecords, setPlayerRecords],
+            remainingPlayers: [remainingPlayers, setRemainingPlayers],
+          }}
+        ></PlayerManager>
+        <div>
+          <PlayerRecordsView
+            state={{
+              playerRecords: [playerRecords],
+              remainingPlayers: [remainingPlayers, setRemainingPlayers],
+            }}
+          ></PlayerRecordsView>
+        </div>
+      </div>
+      <div>
+          <MatchHistoryView
+            state={{
+              playerRecords: [playerRecords],
+            }}
+          ></MatchHistoryView>
+        </div>
     </div>
   );
 }
